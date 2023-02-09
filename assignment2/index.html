@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title></title>
+        <style></style>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        
+    </head>
+
+    <body>
+        <div class="header"><h2>Tic Tac Toe</h2></div>
+        <div class="column side">
+            <!-- Info for player x -->
+            <div class="player info">
+                X
+            </div>
+        </div>
+        <div class="column middle">
+            <!-- Boards -->
+            <div id="boards">
+                <script>
+                    // Board Generation
+                    for (i=0; i < 9; i++){
+                        document.write( 
+                          `<div class="board">`
+
+                        + `</div>`)
+                    }
+                </script>
+            </div>
+        </div>
+        <div class="column side">
+            <!-- Info for player y -->
+            <div class="player info">
+                O
+            </div>
+        </div>
+    </body>
+</html>
