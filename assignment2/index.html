@@ -16,7 +16,17 @@
         </div>
         <div class="column middle">
             <!-- Boards -->
-            <div id="boards">
+            <script>
+                // Board Generation
+                document.write(`<div class="boards">`)
+
+                for (i=0; i < 9; i++){
+                    document.write(`<div class="board" id="b${i}"> </div>`)
+                }
+                
+                document.write(`</div>`)
+            </script>
+            <!-- <div id="boards">
                 <script>
                     // Board Generation
                     for (i=0; i < 9; i++){
@@ -26,7 +36,7 @@
                         + `</div>`)
                     }
                 </script>
-            </div>
+            </div> -->
         </div>
         <div class="column side">
             <!-- Info for player y -->
