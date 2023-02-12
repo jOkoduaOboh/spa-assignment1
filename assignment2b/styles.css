@@ -34,11 +34,11 @@
   .board {
     color: rgb(48, 48, 48);
     font-weight: bolder;
-    font-size: 9vw;
+    font-size: 9.5vw;
     text-align: center;
 
-    width: 11vw;
-    height: 10vw;
+    width: 12vw;
+    height: 11vw;
     margin: 2.5%;
     border: 2px solid #333;
     float: left;
@@ -74,6 +74,7 @@
   /* Full board */
   #boards {
     border: 2px solid #333;
+    margin: 0 auto;
   }
 
   /* Restart Button */
