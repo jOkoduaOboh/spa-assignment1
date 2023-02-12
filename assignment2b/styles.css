@@ -9,7 +9,7 @@
   /* Style the header */
   .header {
     background-color: #f1f1f1;
-    padding: 0.1%;
+    padding: 0.2%;
     text-align: center;
     font-size: 35px;
   }
@@ -32,9 +32,13 @@
 
   /* Single board */
   .board {
-    color: rgb(27, 160, 160);
-    width: 13vw;
-    height: 12vw;
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 9vw;
+    text-align: center;
+
+    width: 11vw;
+    height: 10vw;
     margin: 2.5%;
     border: 2px solid #333;
     float: left;
@@ -50,11 +54,41 @@
     background-color: #e1eaf0;
     padding: 0.1%;
     text-align: center;
-    font-size: 35px;
+    font-size: 6vw;
+  }
+
+  /* Win Graphic */
+  .win {
+    color: rgb(61, 177, 46);
+  }
+
+  /* Loss Graphic */
+  .loss {
+    color: rgb(243, 78, 119);
+  }
+  /* Tie Graphic */
+  .tie {
+    color: rgb(58, 180, 160);
   }
 
   /* Full board */
   #boards {
     border: 2px solid #333;
+  }
+
+  /* Restart Button */
+  #restart {
+    background-color: #55a3bd;
+    color: rgb(255, 255, 255);
+
+    border: none;
+    border-radius: 7%;
+
+    font-size: 2vw;
+    padding: 0.5vw 0.9vw;
+  }
+
+  #restart:hover{
+    background-color: rgb(74, 194, 194);
   }
 
