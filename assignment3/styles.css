@@ -1,0 +1,208 @@
+  *  {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Style the header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 0.2%;
+    text-align: center;
+    font-size: 35px;
+  }
+  
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 1%;
+  }
+  
+  /* Left and right column */
+  .column.side {
+    width: 25%;
+  }
+  
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+  }
+
+  /* Menu Item */
+  .menuItem {
+    color: rgb(48, 48, 48);
+    font-weight: bold;
+    font-size: 2vw;
+    text-align: left;
+
+    width: 21vw;
+    height: 3vw;
+    margin: 0.25%;
+    border: 0.05px none #333;
+    float: left;
+  }
+
+  /* Cart Item */
+  .cartItem {
+    color: rgb(48, 48, 48);
+    font-weight: bold;
+    font-size: 2vw;
+    text-align: left;
+
+    width: 25vw;
+    height: 3vw;
+    margin: 0.25%;
+    border: 0.05px none #333;
+    float: left;
+  }
+
+  .underline {
+    color: rgb(48, 48, 48);
+
+    width: 47vw;
+    height: 0vw;
+    margin: 0.25%;
+    border: 0.05px solid #333;
+    float: left;
+  }
+
+  /* Item Price */
+  .itemPrice {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 2vw;
+    text-align: left;
+
+    width: 7vw;
+    height: 3vw;
+    margin: 0.25%;
+    border: 0.05px none #333;
+    float: left;
+  }
+
+  /* Item Counts */
+  .itemCount {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 2vw;
+    text-align: left;
+
+    width: 8vw;
+    height: 3vw;
+    margin: 0.25%;
+    border: 0.05px solid #333;
+    float: left;
+  }
+
+  /* Cart Item Total */
+  .cartCount {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 2vw;
+    text-align: left;
+
+    width: 12vw;
+    height: 3vw;
+    margin: 0.25%;
+    border: 0.05px none #333;
+    float: left;
+  }
+
+  .addItem {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 2vw;
+    text-align: center;
+
+    width: 8vw;
+    height: 3vw;
+    margin-left: 4%;
+    border: 2px solid #333;
+    float: left;
+  }
+
+  /* Hover interaction */
+  .addItem:hover {
+    background-color: rgb(183, 225, 238);
+    cursor: pointer;
+  }
+
+  /* Information for each player */
+  .player.info {
+    background-color: #e1eaf0;
+    padding: 0.1%;
+    text-align: center;
+    font-size: 6vw;
+  }
+
+  .switchDisplay {
+    background-color: #e1eaf0;
+    padding: 0.1%;
+    text-align: center;
+    font-size: 4vw;
+
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+
+    width: 18vw;
+    height: 5vw;
+    margin: 4%;
+    border: 2px solid #333;
+    float: center;
+  }
+
+  .switchDisplay:hover {
+    background-color: rgb(90, 203, 238);
+    cursor: pointer;
+  }
+
+  /* Win Graphic */
+  .win {
+    color: rgb(61, 177, 46);
+  }
+
+  /* Loss Graphic */
+  .loss {
+    color: rgb(243, 78, 119);
+  }
+  /* Tie Graphic */
+  .tie {
+    color: rgb(58, 180, 160);
+  }
+
+  /* Full board */
+  #menu {
+    font-weight: bolder;
+    font-size: 4vw;
+
+    margin: 0 auto;
+  }
+
+  #notification {
+    color: rgb(48, 48, 48);
+    font-weight: bold;
+    font-size: 2vw;
+    text-align: center;
+
+    width: 45vw;
+    height: 3vw;
+    margin-top: 10%;
+    border: 0.05px none #333;
+    float: left;
+  }
+
+  /* Restart Button */
+  #restart {
+    background-color: #55a3bd;
+    color: rgb(255, 255, 255);
+
+    border: none;
+    border-radius: 7%;
+
+    font-size: 2vw;
+    padding: 0.5vw 0.9vw;
+  }
+
+
