@@ -129,14 +129,6 @@
     cursor: pointer;
   }
 
-  /* Information for each player */
-  .player.info {
-    background-color: #e1eaf0;
-    padding: 0.1%;
-    text-align: center;
-    font-size: 6vw;
-  }
-
   .switchDisplay {
     background-color: #e1eaf0;
     padding: 0.1%;
@@ -158,21 +150,7 @@
     cursor: pointer;
   }
 
-  /* Win Graphic */
-  .win {
-    color: rgb(61, 177, 46);
-  }
 
-  /* Loss Graphic */
-  .loss {
-    color: rgb(243, 78, 119);
-  }
-  /* Tie Graphic */
-  .tie {
-    color: rgb(58, 180, 160);
-  }
-
-  /* Full board */
   #menu {
     font-weight: bolder;
     font-size: 4vw;
@@ -192,17 +170,3 @@
     border: 0.05px none #333;
     float: left;
   }
-
-  /* Restart Button */
-  #restart {
-    background-color: #55a3bd;
-    color: rgb(255, 255, 255);
-
-    border: none;
-    border-radius: 7%;
-
-    font-size: 2vw;
-    padding: 0.5vw 0.9vw;
-  }
-
-
