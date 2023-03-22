@@ -1,0 +1,230 @@
+<html>
+
+<head>
+    <title>Object TicTacToe</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>Tic Tac Toe v2</h2>
+        <!-- Play again Button -->
+        <button id="restart">Play Again</button>
+    </div>
+    <div class="column side">
+        <!-- Info for player 1 -->
+        <div class="player info">
+            <strong>X</strong>
+            <div id="p1Info">
+                Your Turn
+            </div>
+        </div>
+    </div>
+    <div class="column middle">
+        <!-- Boards -->
+        <script>
+            // Board Generation
+            var board = []
+
+            document.write(`<div id="boards">`)
+            for (i = 0; i < 9; i++) {
+                var boardID = (i % 3) + '.' + parseInt(i / 3, 10)
+                board[boardID] = {
+                    "isFree": true
+                }
+                document.write(`<div class="board" id="${boardID}"> </div>`)
+            }
+            document.write(`</div>`)
+        </script>
+    </div>
+    <div class="column side">
+        <!-- Info for player 2 -->
+        <div class="player info">
+            <strong>O</strong>
+            <div id="p2Info">
+                Your Turn
+            </div>
+        </div>
+    </div>
+
+    <!-- Hide All Unnecessary Info Elements -->
+    <script>
+        document.getElementById("p2Info").style.display = 'none';
+
+        document.getElementById("restart").style.display = 'none';
+
+    </script>
+
+    <script>
+        //Holds information on all ships
+        var game = {
+            total: 0,
+            turn: 1,
+            xPositions: [],
+            oPositions: [],
+            isActive: true,
+        }
+
+        var winConditions = [
+            ['0.0', '1.0', '2.0'],
+            ['0.0', '1.1', '2.2'],
+            ['0.0', '0.1', '0.2'],
+            ['1.0', '1.1', '1.2'],
+            ['2.0', '1.1', '0.2'],
+            ['2.0', '2.1', '2.2'],
+            ['0.1', '1.1', '2.1'],
+            ['0.2', '1.2', '2.2']
+        ]
+
+        //Processes Block click event
+        function blockClicked(block){
+                if (game.total < 9){
+                    if (game.turn == 1){
+                        document.getElementById(block).innerHTML = "X"
+                        ++game.total
+                    } else if (game.turn == 2){
+                        document.getElementById(block).innerHTML = "O"
+                        ++game.total
+                    }
+                    if(game.turn != 3){
+                        if(checkWin() == true){
+                            //Display Win Message
+                            processWin();
+                            game.turn = 3
+                        }else{
+                            changeTurn();
+                        }
+                    }
+                }
+                if(game.total == 9){                    
+                    if(game.turn != 3){
+                        if(checkWin() == true){
+                            //Display Win Message
+                            processWin();
+                        }else{
+                            // Display Tie Message
+                            document.getElementById("p2Info").innerHTML = 'Tie Game!';
+                            document.getElementById("p2Info").innerHTML = 'Tie Game!';
+                            document.getElementById("restart").style.display = '';
+                            game.turn = 3
+                        }
+                    }
+                }
+            }
+
+        //Notifies Player of turn change
+        function changeTurn() {
+            if (game.turn == 1) {
+                game.turn = 2
+                document.getElementById("p1Info").style.display = 'none';
+                document.getElementById("p2Info").innerHTML = 'Your Turn';
+                document.getElementById("p2Info").style.display = '';
+            } else {
+                game.turn = 1
+                document.getElementById("p1Info").innerHTML = 'Your Turn';
+                document.getElementById("p1Info").style.display = '';
+                document.getElementById("p2Info").style.display = 'none';
+            }
+        }
+
+        //Notifies Players of Win
+        function processWin() {
+            if (game.turn == 1) {
+                document.getElementById("p1Info").innerHTML = 'You Win';
+                document.getElementById("p1Info").style.color = 'rgb(61, 177, 46)';
+                document.getElementById("p1Info").style.display = '';
+                document.getElementById("p2Info").innerHTML = 'You Lose';
+                document.getElementById("p2Info").style.color = 'rgb(243, 78, 119)';
+                document.getElementById("p2Info").style.display = '';
+            } else if (game.turn == 2) {
+                document.getElementById("p1Info").innerHTML = 'You Lose';
+                document.getElementById("p1Info").style.color = 'rgb(243, 78, 119)';
+                document.getElementById("p1Info").style.display = '';
+                document.getElementById("p2Info").innerHTML = 'You Win';
+                document.getElementById("p2Info").style.color = 'rgb(61, 177, 46)';
+                document.getElementById("p2Info").style.display = '';
+            }
+
+            document.getElementById("restart").style.display = '';
+        }
+
+        //Checks if win wondition is met
+        function checkWin() {
+            var positions = game.xPositions
+            if (game.turn == 2) {
+                positions = game.oPositions
+            }
+            var win = false
+
+            //Checks all win conditions
+            for (i = 0; i < winConditions.length; i++) {
+                if (positions.indexOf(winConditions[i][0]) > -1) {
+                    if (positions.indexOf(winConditions[i][1]) > -1) {
+                        if (positions.indexOf(winConditions[i][2]) > -1) {
+                            win = true
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return win;
+        }
+
+        // Checks Blocks that are available to be chosen
+        function checkFree(boardID) {
+            if (board[boardID].isFree == true) {
+                board[boardID].isFree = false
+                if (game.turn == 1)
+                    game.xPositions.push(boardID)
+                if (game.turn == 2)
+                    game.oPositions.push(boardID)
+                blockClicked(boardID)
+            }
+        }
+
+        //Resets the game to the beginning state
+        function resetGame() {
+            game.turn = 1;
+            game.total = 0;
+
+            game.xPositions = [];
+            game.oPositions = [];
+
+            game.isGameActive = true;
+
+            for (i = 0; i < 9; i++) {
+                var boardID = i % 3 + '.' + parseInt(i / 3, 10)
+                board[boardID].isFree = true;
+            }
+
+            document.querySelectorAll('.board').forEach(
+                board => {
+                    board.innerHTML = '';
+                }
+            )
+
+            document.getElementById("p1Info").innerHTML = "Your Turn";
+
+            document.getElementById("p1Info").style.color = 'rgb(0, 0, 0)';
+            document.getElementById("p2Info").style.color = 'rgb(0, 0, 0)';
+
+            document.getElementById("p1Info").style.display = '';
+            document.getElementById("p2Info").style.display = 'none';
+            document.getElementById("restart").style.display = 'none';
+
+        }
+
+        //Event listeners for each block
+        document.querySelectorAll('.board').forEach(
+            board => {
+                board.onclick = () => { checkFree(board.id) }
+            }
+        )
+
+        //Event listener to reset the game
+        document.getElementById("restart").onclick = () => { resetGame() }
+    </script>
+</body>
+
+</html>
