@@ -46,13 +46,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     )
 
-    document.querySelectorAll('.wordLetter').forEach(
-        board => {
-            board.oninput = (e) => {
-                processTouch(e, board.id)
+    if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
+        // Check if the current device is mobile
+        document.querySelectorAll('.wordLetter').forEach(
+            board => {
+                board.oninput = (e) => {
+                    processTouch(e, board.id)
+                }
             }
-        }
-    )
+        )
+    }
 
     //Event listener to reset the game
     document.getElementById("restart").onclick = () => { newGame() }
@@ -89,33 +92,31 @@ const getWord = async () => {
 
 const processTouch = async (e, boardID) => {
     console.log("changed Touches", e)
-    if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
-        // This checks if the current device is in fact mobile
-        var x = e.data;
-        document.getElementById(boardID).value = x;
-        var input = document.getElementById(boardID).value;
 
-        console.log("Inputted Value: ", x)
-        console.log("Code Value: ", x.charCodeAt(0))
+    var x = e.data;
+    document.getElementById(boardID).value = x;
+    var input = document.getElementById(boardID).value;
 
-        // Alphabet upper case
-        if (x.charCodeAt(0) >= 65 && x.charCodeAt(0) <= 90) {
-            console.log("greater")
-            if (input != "") {
-                const wordPos = board[boardID].wordPos
-                const letterPos = board[boardID].letterPos
-                console.log("This is: ", input)
-                board[boardID].letter = input.toLowerCase();
-                game.guess[letterPos] = input.toLowerCase();
-                if (letterPos < 4) {
-                    const nextId = wordPos + '.' + (letterPos + 1)
-                    document.getElementById(nextId).focus();
-                }
+    console.log("Inputted Value: ", x)
+    console.log("Code Value: ", x.charCodeAt(0))
+
+    // Alphabet upper case
+    if (x.charCodeAt(0) >= 65 && x.charCodeAt(0) <= 90) {
+        console.log("greater")
+        if (input != "") {
+            const wordPos = board[boardID].wordPos
+            const letterPos = board[boardID].letterPos
+            console.log("This is: ", input)
+            board[boardID].letter = input.toLowerCase();
+            game.guess[letterPos] = input.toLowerCase();
+            if (letterPos < 4) {
+                const nextId = wordPos + '.' + (letterPos + 1)
+                document.getElementById(nextId).focus();
             }
-
         }
-        document.getElementById("logInfo").innerHTML = "Mobile";
+
     }
+    document.getElementById("logInfo").innerHTML = "Mobile";
 }
 
 
@@ -195,8 +196,6 @@ const processKey = async (e, boardID) => {
             }
         }
         console.log("This is: ", x)
-        //checkMatch()
-        // Alphabet lower case
     } else {
         if (x != 16)
             document.getElementById(boardID).value = "";
