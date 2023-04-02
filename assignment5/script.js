@@ -198,7 +198,7 @@ const processKey = async (e, boardID) => {
         }
         console.log("This is: ", x)
     } else {
-        if (x != 16)
+        if (x != 16 && x != 229)
             document.getElementById(boardID).value = "";
     }
 }
