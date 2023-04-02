@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.wordLetter').forEach(
         board => {
             board.ontouchend = (e) => {
-                processKey(e, board.id)
+                processTouch(e, board.id)
             }
         }
     )
@@ -85,6 +85,10 @@ const getWord = async () => {
         .catch((error) => {
             console.log(error);
         });
+}
+
+const processTouch = async (e, boardID) => {
+    document.getElementById("logInfo").innerHTML = e;
 }
 
 
