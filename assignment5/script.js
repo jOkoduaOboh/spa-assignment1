@@ -94,6 +94,9 @@ const processTouch = async (e, boardID) => {
         var x = e.data.toLowerCase();
         var input = document.getElementById(boardID).value;
 
+        console.log("Inputted Value: ", x)
+        console.log("Inputted Value code: ", x.charAt(0))
+
         // Alphabet upper case
         if (x >= 65 && x <= 90) {
             console.log("greater")
@@ -110,14 +113,12 @@ const processTouch = async (e, boardID) => {
             // }
 
         }
-        console.log("Mobile:")
+        document.getElementById("logInfo").innerHTML = "Mobile";
     }
 }
 
 
 const processKey = async (e, boardID) => {
-    console.log("Keyuppp: ", e)
-    document.getElementById("logInfo").innerHTML = e;
     var x = e.keyCode;
     var input = document.getElementById(boardID).value;
 
