@@ -91,14 +91,14 @@ const processTouch = async (e, boardID) => {
     console.log("changed Touches", e)
     if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
         // This checks if the current device is in fact mobile
-        var x = e.data.toLowerCase();
+        var x = e.data;
         var input = document.getElementById(boardID).value;
 
         console.log("Inputted Value: ", x)
         console.log("Code Value: ", x.charCodeAt(0))
 
         // Alphabet upper case
-        if (x.charCodeAt() >= 65 && x.charCodeAt() <= 90) {
+        if (x.charCodeAt(0) >= 65 && x.charCodeAt(0) <= 90) {
             console.log("greater")
             // if (input != "") {
             //     const wordPos = board[boardID].wordPos
