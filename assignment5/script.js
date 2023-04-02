@@ -354,9 +354,6 @@ function newGame() {
 
     updateStats();
 
-    //Test Check Word
-    //checkWord("loca")
-
     // // Make only the first guess editable
     for (i = 0; i < 5; i++) {
         document.getElementById(`${0}.${i}`).removeAttribute('readonly');
