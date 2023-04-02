@@ -109,6 +109,7 @@ const processTouch = async (e, boardID) => {
             console.log("This is: ", input)
             board[boardID].letter = input.toLowerCase();
             game.guess[letterPos] = input.toLowerCase();
+            document.getElementById(boardID).value = x;
             if (letterPos < 4) {
                 const nextId = wordPos + '.' + (letterPos + 1)
                 document.getElementById(nextId).focus();
