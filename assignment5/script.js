@@ -23,7 +23,8 @@ const generateBoard = () => {
         var boardID = word + '.' + letter
         board[boardID] = {
             "wordPos": word,
-            "letterPos": letter
+            "letterPos": letter,
+            "letter": ""
         }
         document.getElementById('boards').innerHTML +=
             `<div class="board" id="b-${boardID}">
