@@ -95,6 +95,7 @@ const processTouch = async (e, boardID) => {
         var input = document.getElementById(boardID).value;
 
         console.log("Inputted Value: ", x)
+        console.log("Code Value: ", x.charCodeAt(0))
 
         // Alphabet upper case
         if (x.charCodeAt() >= 65 && x.charCodeAt() <= 90) {
