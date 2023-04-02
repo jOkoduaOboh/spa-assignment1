@@ -95,7 +95,7 @@ const processTouch = async (e, boardID) => {
 
 
 const processKey = async (e, boardID) => {
-    console.log("Keyuppp")
+    console.log("Keyuppp: ", e)
     var x = e.keyCode;
     var input = document.getElementById(boardID).value;
 
