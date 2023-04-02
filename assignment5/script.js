@@ -64,15 +64,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Retrieves word for user to guess
 const getWord = async () => {
-    const url = "https://random-words5.p.rapidapi.com/getMultipleRandom?count=1&wordLength=5";
-    const config = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': 'cc15021543msh4f1f720c4802207p1dee0ejsnea57365bbe43',
-            'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-        }
-    };
-    fetch(url, config)
+    //const url = "https://random-words5.p.rapidapi.com/getMultipleRandom?count=1&wordLength=5";
+    const url = "https://random-word-api.herokuapp.com/word?length=5"
+    // const config = {
+    //     method: 'GET',
+    //     headers: {
+    //         'X-RapidAPI-Key': 'cc15021543msh4f1f720c4802207p1dee0ejsnea57365bbe43',
+    //         'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+    //     }
+    // };
+    fetch(url)
         .then((response) => response.json())
         .then((data) => {
             const result = data[0];
