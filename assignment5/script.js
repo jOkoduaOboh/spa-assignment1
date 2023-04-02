@@ -130,35 +130,37 @@ const processKey = async (e, boardID) => {
             //document.getElementById(letter + '.' + word)
 
             game.guessedWord = game.guess.join("")
-            checkWord((isValidWord) => {
-                //Valid Word
-                if (isValidWord == true) {
-                    game.guessesMade++
-                    console.log("It is Valid")
-                    if (wordPos < 5) {
-                        const nextId = (wordPos + 1) + '.0'
-                        for (i = 0; i < 5; i++) {
-                            document.getElementById(`${wordPos}.${i}`).setAttribute('readonly', true);
+            if (checkEqual(wordPos) == false) {
+                checkWord((isValidWord) => {
+                    //Valid Word
+                    if (isValidWord == true) {
+                        game.guessesMade++
+                        console.log("It is Valid")
+                        if (wordPos < 5) {
+                            const nextId = (wordPos + 1) + '.0'
+                            for (i = 0; i < 5; i++) {
+                                document.getElementById(`${wordPos}.${i}`).setAttribute('readonly', true);
+                            }
+                            for (i = 0; i < 5; i++) {
+                                document.getElementById(`${wordPos + 1}.${i}`).removeAttribute('readonly');
+                            }
+                            document.getElementById(nextId).focus();
                         }
+                        checkMatch(wordPos)
+                    } else {
+                        //Invalid Word
                         for (i = 0; i < 5; i++) {
-                            document.getElementById(`${wordPos + 1}.${i}`).removeAttribute('readonly');
+                            document.getElementById(`${wordPos}.${i}`).value = "";
                         }
-                        document.getElementById(nextId).focus();
-                    }
-                    checkMatch(wordPos)
-                } else {
-                    //Invalid Word
-                    for (i = 0; i < 5; i++) {
-                        document.getElementById(`${wordPos}.${i}`).value = "";
-                    }
-                    document.getElementById(`${wordPos}.0`).focus();
-                    document.getElementById("notification").innerHTML = 'Word does not exist </br> Try Again';
-                    document.getElementById("notification").style.color = 'rgb(183, 77, 89)';
-                    showNotification()
+                        document.getElementById(`${wordPos}.0`).focus();
+                        document.getElementById("notification").innerHTML = 'Word does not exist </br> Try Again';
+                        document.getElementById("notification").style.color = 'rgb(183, 77, 89)';
+                        showNotification()
 
-                    console.log("invalid Word")
-                }
-            })
+                        console.log("invalid Word")
+                    }
+                })
+            }
         }
         console.log("This is: ", x)
         //checkMatch()
@@ -184,6 +186,19 @@ async function checkWord(callback) {
         .catch((error) => {
             console.log(error);
         });
+}
+
+function checkEqual(wordPos) {
+    if (game.guessedWord == game.word) {
+        game.guessesMade++
+        for (i = 0; i < 5; i++) {
+            setCorrect(`${wordPos}.${i}`);
+            document.getElementById(`${wordPos + 1}.${i}`).setAttribute('readonly', true);
+        }
+        processWin()
+        return true
+    }
+    return false
 }
 
 function checkMatch(wordPos) {
