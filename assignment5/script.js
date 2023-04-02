@@ -88,7 +88,7 @@ const getWord = async () => {
 }
 
 const processTouch = async (e, boardID) => {
-    document.getElementById("logInfo").innerHTML = e;
+    document.getElementById("logInfo").innerHTML = e.changedTouches;
 }
 
 
