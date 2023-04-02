@@ -45,6 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     )
 
+    document.querySelectorAll('.wordLetter').forEach(
+        board => {
+            board.ontouchend = (e) => {
+                processKey(e, board.id)
+            }
+        }
+    )
+
     //Event listener to reset the game
     document.getElementById("restart").onclick = () => { newGame() }
     document.getElementById("debug").onclick = () => { debugMode() }
