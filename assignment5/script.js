@@ -37,14 +37,12 @@ const generateBoard = () => {
 document.addEventListener('DOMContentLoaded', function () {
     generateBoard();
 
-    //Event listeners for each letter entered
-    document.querySelectorAll('.wordLetter').forEach(
-        board => {
-            board.onkeyup = (e) => {
-                processKey(e, board.id)
-            }
-        }
-    )
+    
+    // document.querySelectorAll('.wordLetter').forEach(
+    //     board => {
+            
+    //     }
+    // )
 
     if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
         // Check if the current device is mobile
@@ -56,6 +54,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         )
     }
+    //Event listeners for each letter entered
+    document.querySelectorAll('.wordLetter').forEach(
+        board => {
+            board.onkeyup = (e) => {
+                processKey(e, board.id)
+            }
+            board.onfocus = () => {
+                const domElement = document.getElementById(board.id)
+                if(domElement.readOnly == false)
+                    domElement.style.backgroundColor = "rgb(214, 214, 214)";
+            }
+            board.onblur = () => {
+                document.getElementById(board.id).style.backgroundColor = "rgb(255, 255, 255)";
+            }
+        }
+    )
 
     //Event listener to reset the game
     document.getElementById("restart").onclick = () => { newGame() }
@@ -115,9 +129,7 @@ const processTouch = async (e, boardID) => {
                 document.getElementById(nextId).focus();
             }
         }
-
     }
-    document.getElementById("logInfo").innerHTML = "Mobile";
 }
 
 
@@ -167,7 +179,7 @@ const processKey = async (e, boardID) => {
             if (checkEqual(wordPos) == false) {
                 checkWord((isValidWord) => {
                     //Valid Word
-                    if (isValidWord == true) {
+                    if (isValidWord == true && game.guessedWord.length==5) {
                         game.guessesMade++
                         console.log("It is Valid")
                         if (wordPos < 5) {
@@ -285,7 +297,7 @@ function setIncorrect(element) {
 }
 
 function setExists(element) {
-    document.getElementById(element).style.backgroundColor = 'rgb(191, 191, 80)';
+    document.getElementById(element).style.backgroundColor = 'rgb(240, 230, 140)';
 }
 function setCorrect(element) {
     document.getElementById(element).style.backgroundColor = 'rgb(104, 176, 123)';
