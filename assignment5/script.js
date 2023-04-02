@@ -37,13 +37,6 @@ const generateBoard = () => {
 document.addEventListener('DOMContentLoaded', function () {
     generateBoard();
 
-    
-    // document.querySelectorAll('.wordLetter').forEach(
-    //     board => {
-            
-    //     }
-    // )
-
     if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
         // Check if the current device is mobile
         document.querySelectorAll('.wordLetter').forEach(
