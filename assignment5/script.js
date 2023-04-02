@@ -89,6 +89,8 @@ const getWord = async () => {
 
 const processTouch = async (e, boardID) => {
     document.getElementById("logInfo").innerHTML = e.changedTouches;
+    console.log("event: ", e);
+    console.log("changed Touches", e.changedTouches)
 }
 
 
