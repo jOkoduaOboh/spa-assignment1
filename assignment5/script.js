@@ -290,7 +290,7 @@ function setIncorrect(element) {
 }
 
 function setExists(element) {
-    document.getElementById(element).style.backgroundColor = 'rgb(240, 230, 140)';
+    document.getElementById(element).style.backgroundColor = 'rgb(255,255, 140)';
 }
 function setCorrect(element) {
     document.getElementById(element).style.backgroundColor = 'rgb(104, 176, 123)';
