@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.wordLetter').forEach(
         board => {
-            board.ontouchend = (e) => {
+            board.oninput = (e) => {
                 processTouch(e, board.id)
             }
         }
@@ -88,8 +88,10 @@ const getWord = async () => {
 }
 
 const processTouch = async (e, boardID) => {
-    console.log("event: ", e);
-    console.log("changed Touches", e.changedTouches)
+    console.log("changed Touches", e)
+    if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
+        // This checks if the current device is in fact mobile
+      }
 }
 
 
