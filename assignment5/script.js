@@ -105,6 +105,8 @@ const processKey = async (e, boardID) => {
         if (letterPos > 0 && board[boardID].letter == "") {
             const prevId = wordPos + '.' + (letterPos - 1)
             console.log("Previous: ", prevId)
+            board[prevId].letter = ""
+            document.getElementById(prevId).value = "";
             document.getElementById(prevId).focus();
         }
         board[boardID].letter = ""
