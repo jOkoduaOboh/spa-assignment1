@@ -91,7 +91,27 @@ const processTouch = async (e, boardID) => {
     console.log("changed Touches", e)
     if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
         // This checks if the current device is in fact mobile
-      }
+        var x = e.data.toLowerCase();
+        var input = document.getElementById(boardID).value;
+
+        // Alphabet upper case
+        if (x >= 65 && x <= 90) {
+            console.log("greater")
+            // if (input != "") {
+            //     const wordPos = board[boardID].wordPos
+            //     const letterPos = board[boardID].letterPos
+            //     console.log("This is: ", input)
+            //     board[boardID].letter = input.toLowerCase();
+            //     game.guess[letterPos] = input.toLowerCase();
+            //     if (letterPos < 4) {
+            //         const nextId = wordPos + '.' + (letterPos + 1)
+            //         document.getElementById(nextId).focus();
+            //     }
+            // }
+
+        }
+        console.log("Mobile:")
+    }
 }
 
 
