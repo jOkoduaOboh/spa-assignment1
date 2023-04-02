@@ -97,7 +97,7 @@ const processTouch = async (e, boardID) => {
         console.log("Inputted Value: ", x)
 
         // Alphabet upper case
-        if (x.charAt() >= 65 && x.charAt() <= 90) {
+        if (x.charCodeAt() >= 65 && x.charCodeAt() <= 90) {
             console.log("greater")
             // if (input != "") {
             //     const wordPos = board[boardID].wordPos
