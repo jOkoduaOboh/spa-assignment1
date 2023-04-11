@@ -1,0 +1,202 @@
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Style the header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 0.1%;
+    text-align: center;
+    font-size: 35px;
+  }
+
+  /* Left and right column */
+  .header.side {
+    float: left;
+    width: 20%;
+    height: 7%;
+  }
+
+  /* Middle column */
+  .header.middle {
+    float: left;
+    width: 60%;
+    height: 7%;
+    font-size: 25px;
+  }
+
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+  }
+
+  /* Left and right column */
+  .column.side {
+    width:20%;
+  }
+
+  /* Middle column */
+  .column.middle {
+    width: 30%;
+  }
+
+  .column.side2 {
+    width:50%;
+  }
+
+  /* Single board */
+  .board {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 9.5vw;
+    text-align: center;
+
+    width: 19.4%;
+    height: 6vw;
+    margin: 0.3%;
+    border: 2px solid #333;
+    float: left;
+  }
+
+  .boardwrapper {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .keyboard {
+    color: rgb(48, 48, 48);
+    font-weight: bolder;
+    font-size: 3vw;
+    text-align: center;
+
+    width: 9.4%;
+    height: 7vw;
+    margin: 0.3%;
+    border: none;
+    float: left;
+  }
+
+  .keyLetter {
+    height: 94%;
+    width: 90%;
+    margin-top: 3%;
+    background-color: #e7e7e7;
+
+    font-size: 95%;
+    text-align: center;
+    font-weight: bolder;
+    -webkit-text-stroke: 2px wheat;
+    text-transform: uppercase;
+
+    border: 2px none #333;
+  }
+
+  .keyLetter:hover {
+    height: 99%;
+    width: 99%;
+    margin-top: 3%;
+    background-color: #999999;
+
+    font-size: 95%;
+    text-align: center;
+    -webkit-text-stroke: 1px wheat;
+    outline: none;
+    cursor: default;
+  }
+
+  .wordLetter {
+    height: 94%;
+    width: 90%;
+    margin-top: 3%;
+    background-color: #e7e7e7;
+
+    font-size: 95%;
+    text-align: center;
+    font-weight: bolder;
+    -webkit-text-stroke: 2px rgb(219, 179, 245);
+    text-transform: uppercase;
+
+    border: 0px none #333;
+  }
+
+  .wordLetter:focus {
+    height: 94%;
+    width: 90%;
+    margin-top: 3%;
+    background-color: #999999;
+
+    font-size: 95%;
+    text-align: center;
+    -webkit-text-stroke: 1px rgb(219, 179, 245);
+    outline: none;
+  }
+
+  /* Hover interaction */
+  .wordLetter:hover {
+    background-color: rgb(216, 236, 241);
+  }
+
+  /* Information for each player */
+  .player.info {
+    background-color: #e1eaf0;
+    padding: 0.1%;
+    text-align: center;
+    font-size: 4vw;
+  }
+
+
+  #titleHeader{
+    margin-bottom: 0.1%;
+  }
+
+  #debug {
+    background-color: #863565;
+    color: rgb(255, 255, 255);
+
+    border: none;
+    border-radius: 7%;
+
+    font-size: 1.5vw;
+    padding: 0.2vw 0.7vw;
+  }
+
+  #debug:hover {
+    background-color: #a84982;
+  }
+
+  #boards {
+    border: 1px none #333;
+    margin: 0 auto;
+  }
+
+  /* Full board */
+  #notification {
+    font-size: 2.1vw;
+    text-align: center;
+  }
+
+  /* Restart Button */
+  #restart {
+    background-color: #55a3bd;
+    color: rgb(255, 255, 255);
+
+    border: none;
+    border-radius: 7%;
+
+    font-size: 2vw;
+    padding: 0.5vw 0.9vw;
+  }
+
+  #restart:hover {
+    background-color: rgb(74, 194, 194);
+  }
