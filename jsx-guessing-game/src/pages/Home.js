@@ -61,7 +61,7 @@ const Home = () => {
                     setNotified(true)
                 }, 1500);
             }
-            if (guessesLeft === 1 && gameOver == false) {
+            if (guessesLeft === 1 && gameOver === false) {
                 updateTotalGuesses(getNumOfGuesses() - (guessesLeft - 1))
                 updateGuessesPerWin()
                 e.target.disabled = true;

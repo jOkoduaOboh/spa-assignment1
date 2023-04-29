@@ -25,7 +25,7 @@ const getGuessTendency = () => {
         return 'Higher Numbers'
 
     // returns balanced
-    if(statVals.guessTendency == 0)
+    if(statVals.guessTendency === 0)
         return 'Balanced Numbers'
 
     // returns lower numbers
