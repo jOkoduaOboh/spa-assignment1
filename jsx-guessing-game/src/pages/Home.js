@@ -40,7 +40,6 @@ const Home = () => {
                 e.target.disabled = true;
                 setGameOver(true);
             } else if (guessesLeft > 0) {
-                console.log("Heree")
                 if (guessedVal > valueToGuess) {
                     updateGuessTendency(1);
                     if (guessedVal < closestHigherGuess)

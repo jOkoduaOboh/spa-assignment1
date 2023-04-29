@@ -87,7 +87,6 @@ const TopBar = () => {
                 </SideColumn>
             </Bar>
         </>
-
     )
 }
 
