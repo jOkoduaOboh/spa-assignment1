@@ -18,9 +18,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Search', 'Library'];
-const settings = ['Profile', 'Logout'];
+const auth_settings = ['Profile', 'Logout'];
+const unauth_settings = ['Log In', 'Sign Up'];
 
 const NavigationBar = () => {
+    const settings = unauth_settings;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {

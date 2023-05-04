@@ -6,12 +6,14 @@ import NavigationBar from '../components/NavigationBar';
 import PlayArea from '../components/PlayArea';
 import Footer from '../components/Footer';
 import ListItems from '../components/ListItems';
-
-
+import Data from '../components/UserData';
 
 const theme = createTheme();
 
 export default function Home() {
+
+  console.log(Data.getUserAlbums())
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

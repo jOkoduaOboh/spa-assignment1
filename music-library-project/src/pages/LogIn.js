@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,12 +12,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
+import Data from '../components/UserData';
+import { getUserAlbums, setUserAlbums } from '../components/UserData';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="white" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -29,8 +33,32 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogIn() {
+  const navigate = useNavigate();
+  const userItemName = "pro-music-lib-users";
+
+  useEffect(() => {
+    Data.setUserAlbums({test:"Testing"});
+    console.log("Another one")
+  })
+  
+
+  const [users] = useState(JSON.parse(localStorage.getItem(userItemName)));
+  const [incorrectInfo, setIncorrectInfo] = useState(false);
+
+
+  console.log("Albums from Login: ", Data.getUserAlbums());
+
+  useEffect (() => {
+    if(users === null){
+      //navigate("/signup")
+    }
+  }, [])
+
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIncorrectInfo(true);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
@@ -50,14 +78,21 @@ export default function LogIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Log in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              sx={{
+                input: { color: 'white' },
+                borderColor: 'white',
+                "& .MuiInputLabel-root": { color: 'white' }, //styles the label
+                "& .MuiOutlinedInput-root": { "& > fieldset": { borderColor: "white" } },
+                "& .MuiOutlinedInput-root:hover": { "& > fieldset": { borderColor: "white" } }
+              }}
               margin="normal"
               required
               fullWidth
@@ -68,6 +103,13 @@ export default function LogIn() {
               autoFocus
             />
             <TextField
+              sx={{
+                input: { color: 'white' },
+                borderColor: 'white',
+                "& .MuiInputLabel-root": { color: 'white' }, //styles the label
+                "& .MuiOutlinedInput-root": { "& > fieldset": { borderColor: "white" } },
+                "& .MuiOutlinedInput-root:hover": { "& > fieldset": { borderColor: "white" } }
+              }}
               margin="normal"
               required
               fullWidth
@@ -78,9 +120,10 @@ export default function LogIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="primary" style ={{color: "white"}}/>}
               label="Remember me"
             />
+            {incorrectInfo && <Typography color={'#E55B5B'}>Incorrect email or password</Typography>}
             <Button
               type="submit"
               fullWidth
@@ -90,13 +133,9 @@ export default function LogIn() {
               Log In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs/>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
