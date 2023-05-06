@@ -1,12 +1,9 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
+import HomeBar from './pages/HomeBar';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
-
-import Data from './components/UserData';
-
 
 function App() {
   return (
@@ -14,9 +11,9 @@ function App() {
       <header className="App-header">
       <Router>
         <Routes>
-          <Route path="/" element={<Home data={Data}/>} />
-          <Route path="/signup" element={<SignUp data={Data}/>} />
-          <Route path="/login" element={<LogIn data={Data}/>} />
+          <Route path="*" element={<HomeBar />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
         </Routes>
       </Router>
       </header>

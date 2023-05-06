@@ -22,7 +22,7 @@ const PlayArea = () => {
                     color="text.primary"
                     gutterBottom
                 >
-                    Album layout
+                    Music Library
                 </Typography>
                 <Typography variant="h5" align="center" color="text.secondary" paragraph>
                     Something short and leading about the collection below—its contents,

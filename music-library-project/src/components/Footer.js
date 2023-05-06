@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography';
 
 function Copyright() {
     return (
-      <Typography variant="body2" color="text.secondary" align="center">
+      <Typography variant="body2" color="white" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://mui.com/">
-          Your Website
+          MUI
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -17,17 +17,14 @@ function Copyright() {
 
 const Footer = () => {
     return (
-        <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-            <Typography variant="h6" align="center" gutterBottom>
-                Footer
-            </Typography>
+        <Box component="footer">
             <Typography
                 variant="subtitle1"
                 align="center"
-                color="text.secondary"
+                color="white"
                 component="p"
             >
-                Something here to give the footer a purpose!
+                Happy Searching!
             </Typography>
             <Copyright />
         </Box>

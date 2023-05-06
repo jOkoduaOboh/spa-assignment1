@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Data from '../components/UserData';
-import { getUserAlbums } from '../components/UserData';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
     return (
@@ -37,16 +37,58 @@ const textSX = {
 }
 
 export default function SignUp() {
+    const navigate = useNavigate();
 
-    console.log(getUserAlbums())
+    let allUsers = Data.getAllUsers();
+    let enteredInfo;
+
+    const [inputError, setInputError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false)
+
+    console.log("Allusers00: ", allUsers)
+
+    if (allUsers === null) {
+        allUsers = {}
+    }
+    console.log(allUsers)
+
+    console.log(Data.getUserAlbums())
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const userInfo = new FormData(event.currentTarget);
+        if (userInfo.get('firstName') === "" || userInfo.get('lastName') === "" ||
+            userInfo.get('username') === "" || userInfo.get('password') === "") {
+            console.log("Here")
+            setErrorMessage("Please enter all required fields");
+            setInputError(true);
+        } else {
+            console.log("All: ", allUsers[userInfo.get('username')])
+            if (allUsers[userInfo.get('username')] === undefined) {
+                setInputError(false);
+                enteredInfo = Data.createUser(
+                    userInfo.get('firstName'),
+                    userInfo.get('lastName'),
+                    userInfo.get('username'),
+                    userInfo.get('password')
+                )
+                allUsers[userInfo.get('username')] = enteredInfo;
+                console.log("All + user: ", allUsers)
+                console.log("Info: ", enteredInfo)
+
+                Data.setAllUsers(allUsers)
+                console.log("Data Users: ", Data.getAllUsers())
+                Data.setLoggedIn(true);
+                if(Data.getLoggedIn() === true){
+                    navigate("/")
+                }
+                Data.setUserInfo(enteredInfo)
+            } else {
+                setErrorMessage("This username is already in use");
+                setInputError(true);
+            }
+        }
+
     };
 
     return (
@@ -72,7 +114,6 @@ export default function SignUp() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     sx={textSX}
-                                    autoComplete="given-name"
                                     name="firstName"
                                     required
                                     fullWidth
@@ -89,7 +130,6 @@ export default function SignUp() {
                                     id="lastName"
                                     label="Last Name"
                                     name="lastName"
-                                    autoComplete="family-name"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -97,10 +137,9 @@ export default function SignUp() {
                                     sx={textSX}
                                     required
                                     fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
+                                    id="username"
+                                    label="Username"
+                                    name="username"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -112,10 +151,13 @@ export default function SignUp() {
                                     label="Password"
                                     type="password"
                                     id="password"
-                                    autoComplete="new-password"
                                 />
                             </Grid>
                         </Grid>
+                        {inputError &&
+                            <Typography color={'#E55B5B'}>
+                                {errorMessage}
+                            </Typography>}
                         <Button
                             type="submit"
                             fullWidth

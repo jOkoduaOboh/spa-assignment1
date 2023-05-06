@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -15,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
 import Data from '../components/UserData';
-import { getUserAlbums, setUserAlbums } from '../components/UserData';
 
 function Copyright(props) {
   return (
@@ -34,34 +31,43 @@ const theme = createTheme();
 
 export default function LogIn() {
   const navigate = useNavigate();
-  const userItemName = "pro-music-lib-users";
 
-  useEffect(() => {
-    Data.setUserAlbums({test:"Testing"});
-    console.log("Another one")
-  })
-  
+  let users = Data.getAllUsers();
 
-  const [users] = useState(JSON.parse(localStorage.getItem(userItemName)));
   const [incorrectInfo, setIncorrectInfo] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-
-  console.log("Albums from Login: ", Data.getUserAlbums());
-
-  useEffect (() => {
-    if(users === null){
-      //navigate("/signup")
+   useEffect(() => {
+    console.log("users: ", users)
+    if (users === null) {
+      navigate("/signup")
     }
-  }, [])
-
-  
+    if (Data.getLoggedIn() === true) {
+      navigate("/")
+    }
+   }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIncorrectInfo(true);
     const data = new FormData(event.currentTarget);
+    const user = users[data.get('username')];
+
+    if (user === undefined) {
+      setErrorMessage("User does not exist")
+      setIncorrectInfo(true);
+    } else if (user.password !== data.get("password")) {
+      setErrorMessage("Incorrect username or password")
+      setIncorrectInfo(true);
+    } else {
+      Data.setUserInfo(user)
+      Data.setLoggedIn(true);
+      if (Data.getLoggedIn() === true) {
+        navigate("/")
+      }
+    }
+
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
   };
@@ -96,10 +102,9 @@ export default function LogIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
               autoFocus
             />
             <TextField
@@ -117,13 +122,8 @@ export default function LogIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" style ={{color: "white"}}/>}
-              label="Remember me"
-            />
-            {incorrectInfo && <Typography color={'#E55B5B'}>Incorrect email or password</Typography>}
+            {incorrectInfo && <Typography color={'#E55B5B'}>{errorMessage}</Typography>}
             <Button
               type="submit"
               fullWidth
@@ -133,7 +133,7 @@ export default function LogIn() {
               Log In
             </Button>
             <Grid container>
-              <Grid item xs/>
+              <Grid item xs />
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
