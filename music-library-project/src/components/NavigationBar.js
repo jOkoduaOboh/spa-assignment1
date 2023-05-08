@@ -146,7 +146,7 @@ const NavigationBar = () => {
                     {/* Navigation Items */}
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' }} onClick={() => { handleNavClick(item) }}>
+                            <Button key={item} sx={{ color: '#fff' , background: '#1a73cbdb'}} onClick={() => { handleNavClick(item) }}>
                                 {item}
                             </Button>
                         ))}
