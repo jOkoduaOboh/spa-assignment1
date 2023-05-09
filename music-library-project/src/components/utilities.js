@@ -1,3 +1,5 @@
+import { Link } from "@mui/material";
+
 export const formatTime = (duration) => {
   const mins = ~~((duration % 3600) / 60);
   const secs = ~~duration % 60;
@@ -10,3 +12,9 @@ export const formatTime = (duration) => {
 
   return ret;
 }
+
+export const StyledLink = ({to, contents}) => {
+    return (
+        <Link href={to} color="#1976d2" underline="hover">{contents}</Link>
+    );
+  }

@@ -3,9 +3,9 @@ const sessionAlbumsKey = "userAlbums"
 const sessionSongsKey = "userSongs"
 const sessionArtistsKey = "userArtists"
 const storedUsersKey = "pro-music-lib-users";
-// const storedAlbumsKey = "pro-music-lib-albums";
-// const storedSongsKey = "pro-music-lib-songs";
-// const storedArtistsKey = "pro-music-lib-artists";
+const storedAlbumsKey = "pro-music-lib-albums";
+const storedSongsKey = "pro-music-lib-songs";
+const storedArtistsKey = "pro-music-lib-artists";
 
 // Deletion of item syntax
 // delete userArtists.test2 // for object
@@ -31,7 +31,7 @@ const Data = {
     // session storage functions
     getLoggedIn: () => {
         return JSON.parse(getData("loggedin"));
-    } ,
+    },
     getUserInfo: () => {
         return getData(sessionUserKey);
     },
@@ -70,15 +70,50 @@ const Data = {
         return user
     },
     // local storage functions
-    getAllUsers:() => {
+    getAllUsers: () => {
         return getLocalData(storedUsersKey)
     },
-    setAllUsers:(val) => {
-        setLocalData(storedUsersKey, val)
+    getAllAlbums: () => {
+        return getLocalData(storedAlbumsKey)
+    },
+    getAllSongs: () => {
+        return getLocalData(storedSongsKey)
+    },
+    getAllArtists: () => {
+        return getLocalData(storedArtistsKey)
+    },
+    saveUserInfoLocally: (userData) => {
+        let localData = getLocalData(storedUsersKey)
+        localData[userData.username] = userData
+        setLocalData(storedUsersKey, localData)
+    },
+    saveUserAlbumsLocally: (userAlbums) => {
+        const userInfo = getData(sessionUserKey);
+        let localData = getLocalData(storedAlbumsKey) === null? {}: getLocalData(storedAlbumsKey)
+        if (userAlbums !== null)
+            localData[userInfo.username] = userAlbums
+        setLocalData(storedAlbumsKey, localData)
+    },
+    saveUserSongsLocally: (userSongs) => {
+        const userInfo = getData(sessionUserKey);
+        let localData = getLocalData(storedSongsKey) === null? {}: getLocalData(storedSongsKey)
+        console.log("Users Songs", userSongs)
+        if (userSongs !== null)
+            localData[userInfo.username] = userSongs
+        setLocalData(storedSongsKey, localData)
+    },
+    saveUserArtistsLocally: (userArtists) => {
+        const userInfo = getData(sessionUserKey);
+        let localData = getLocalData(storedArtistsKey) === null? {}: getLocalData(storedArtistsKey)
+        if (userArtists !== null)
+            localData[userInfo.username] = userArtists
+        setLocalData(storedArtistsKey, localData)
     }
 }
 
 export default Data;
 
-export {sessionUserKey, sessionAlbumsKey, sessionSongsKey, sessionArtistsKey,
-        storedUsersKey}
+export {
+    sessionUserKey, sessionAlbumsKey, sessionSongsKey, sessionArtistsKey,
+    storedUsersKey
+}

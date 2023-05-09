@@ -36,7 +36,7 @@ const NavigationBar = () => {
 
     useEffect (() => {
         if (Data.getLoggedIn() === true) {
-            settings = ['Profile', 'Logout'];
+            settings = ['Logout'];
         } else {
             settings = ['Log In', 'Sign Up'];
         }
@@ -54,15 +54,17 @@ const NavigationBar = () => {
     };
 
     const handleNavClick = (item) => {
-        console.log("Here")
+        console.log("Navigation Activated")
         switch (item) {
             case 'Library':
+                if(Data.getLoggedIn){
+                    navigate('/library')
+                }else{
+                    navigate('/login')
+                }
                 break;
             case 'Home':
                 navigate('/')
-                console.log("Clicked")
-                break;
-            case 'Profile':
                 break;
             case 'Logout':
                 Data.setLoggedIn(false)
@@ -79,7 +81,7 @@ const NavigationBar = () => {
 
     const handleKeyUp = (e) => {
         if (e.key === "Enter") {
-            console.log(e.target.value)
+            console.log("Search entry: ", e.target.value)
             if(e.target.value !== "")
                 navigate('/search/'+e.target.value)
         }

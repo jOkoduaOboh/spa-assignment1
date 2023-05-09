@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 export default function SearchResults() {
     const query = useParams()
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState('')
     console.log("Query,", query.entry);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function SearchResults() {
         getResult();
     }, [query.entry])
 
-    if (items === "") {
+    if (items === '') {
         return (
             <>
                 <main>
@@ -53,7 +53,7 @@ export default function SearchResults() {
         <>
             <main>
                 <Box sx={{pt: '3vh'}}/>
-                <ListItems type='search' items={items}></ListItems>
+                <ListItems type='song' items={items}/>
             </main>
         </>
     );

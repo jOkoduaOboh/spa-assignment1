@@ -5,9 +5,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { formatTime } from '../components/utilities';
+import { StyledLink, formatTime } from '../components/utilities';
 
 const Album = () => {
     const album = useParams();
@@ -52,7 +52,6 @@ const Album = () => {
         );
     }
 
-
     return (
         <>
             <Box
@@ -85,9 +84,12 @@ const Album = () => {
                             {albumData.record_type.toUpperCase()}
                         </Typography>
                         {albumData.title}
+                        <Typography variant="subtitle1" align="center" color="text.secondary" paragraph>
+                            {albumData.nb_tracks} SONGS
+                        </Typography>
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        Artist: <Link to={`/artist/${albumData.artist.id}`}> {albumData.artist.name} </Link>
+                        Artist: <StyledLink to={`/artist/${albumData.artist.id}`} contents={albumData.artist.name} />
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
                         Release Date: {albumData.release_date}
@@ -118,12 +120,13 @@ const Album = () => {
                     >
                         {albumData.tracks.data.map((track) =>
                             <Stack
+                                key={track.id}
                                 direction="row"
                                 justifyContent="space-between"
                                 alignItems="baseline"
                             >
                                 <Typography variant="h6" align="center" color="text.secondary" paragraph>
-                                    <Link>{track.title_short}</Link>
+                                    <StyledLink to={`/song/${track.id}`} contents={track.title_short} />
                                 </Typography>
                                 {false && <Button variant="contained">Add to Library</Button>}
                                 {true && <Button variant="outlined">Remove</Button>}

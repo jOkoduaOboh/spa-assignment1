@@ -6,12 +6,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Player from '../components/Player';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { StyledLink } from '../components/utilities';
+import Data from '../components/UserData';
 
 const Song = () => {
     const song = useParams();
     const [songData, setSongData] = useState("")
+    const [isInLibrary, setIsInLibrary] = useState(true)
 
     useEffect(() => {
         const getResult = async () => {
@@ -36,6 +39,35 @@ const Song = () => {
         getResult();
     }, [])
 
+    useEffect(() => {
+        if (Data.getLoggedIn() === true) {
+            if (Data.getUserSongs() === null || Data.getUserSongs()[song.id] === undefined) {
+                setIsInLibrary(false)
+            }
+        }
+    }, [])
+
+    const handleButtonClick = (type) => {
+        console.log(type)
+        let newData;
+        switch (type) {
+            case 'Add':
+                console.log("Data to add: ", songData)
+                newData = Data.getUserSongs()
+                newData[songData.id] = songData
+                Data.setUserSongs(newData)
+                setIsInLibrary(!isInLibrary)
+                break;
+            case 'Remove':
+                newData = Data.getUserSongs()
+                delete newData[songData.id]
+                Data.setUserSongs(newData)
+                setIsInLibrary(!isInLibrary)
+                break;
+            default:
+        }
+    }
+
     if (songData === "") {
         return (
             <>
@@ -51,7 +83,6 @@ const Song = () => {
             </>
         );
     }
-
 
     return (
         <>
@@ -88,10 +119,10 @@ const Song = () => {
                         {songData.title}
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        Artist: <Link to={`/artist/${songData.artist.id}`}> {songData.artist.name} </Link>
+                        Artist: <StyledLink to={`/artist/${songData.artist.id}`} contents={songData.artist.name} />
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        Album: <Link to={`/album/${songData.album.id}`}> {songData.album.title} </Link>
+                        Album: <StyledLink to={`/album/${songData.album.id}`} contents={songData.album.title} />
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
                         Release Date: {songData.release_date}
@@ -108,8 +139,14 @@ const Song = () => {
                         spacing={2}
                         justifyContent="center"
                     >
-                        {false && <Button variant="contained">Add to Library</Button>}
-                        {true && <Button variant="outlined">Remove from Library</Button>}
+                        {!isInLibrary &&
+                            <Button variant="contained" onClick={() => { handleButtonClick('Add') }}>
+                                Add to Library
+                            </Button>}
+                        {isInLibrary &&
+                            <Button variant="outlined" onClick={() => { handleButtonClick("Remove") }}>
+                                Remove from Library
+                            </Button>}
                     </Stack>
                 </Container>
             </Box>
