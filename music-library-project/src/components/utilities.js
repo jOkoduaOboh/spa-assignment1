@@ -1,7 +1,7 @@
 import { Link } from "@mui/material";
 
 export const formatTime = (duration) => {
-  const mins = ~~((duration % 3600) / 60);
+  const mins = ~~(duration / 60);
   const secs = ~~duration % 60;
 
   // Output like "1:01" or "4:03:59" or "123:03:59"

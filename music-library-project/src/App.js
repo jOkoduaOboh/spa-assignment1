@@ -9,8 +9,8 @@ import Data from './components/UserData';
 function App() {
   // Saves Data locally before closing the webpage
   window.onbeforeunload = () => {
-    console.log("Saving Data Locally...")
     if(Data.getLoggedIn() === true){
+      console.log("Saving Data Locally...")
       // save user info
       const user = Data.getUserInfo();
       Data.saveUserInfoLocally(user);

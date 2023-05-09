@@ -9,7 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Toolbar } from '@mui/material';
+import { Link, Toolbar } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -26,15 +26,12 @@ const drawerWidth = 240;
 const navItems = ['Home', 'Library'];
 let settings = [];
 
-const NavigationBar = () => {
+const NavigationBar = ({handleRefresh}) => {
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
-
-
-
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    useEffect (() => {
+    useEffect(() => {
         if (Data.getLoggedIn() === true) {
             settings = ['Logout'];
         } else {
@@ -57,9 +54,9 @@ const NavigationBar = () => {
         console.log("Navigation Activated")
         switch (item) {
             case 'Library':
-                if(Data.getLoggedIn){
+                if (Data.getLoggedIn()) {
                     navigate('/library')
-                }else{
+                } else {
                     navigate('/login')
                 }
                 break;
@@ -67,7 +64,27 @@ const NavigationBar = () => {
                 navigate('/')
                 break;
             case 'Logout':
+                console.log("Saving Data Locally...")
+                // save user info
+                const user = Data.getUserInfo();
+                Data.saveUserInfoLocally(user);
+
+                // save user albums
+                const albums = Data.getUserAlbums();
+                if (albums !== null)
+                    Data.saveUserAlbumsLocally(albums);
+
+                // save user songs
+                const songs = Data.getUserSongs();
+                if (songs !== null)
+                    Data.saveUserSongsLocally(songs);
+
+                // save user artists
+                const artists = Data.getUserArtists();
+                if (artists !== null)
+                    Data.saveUserArtistsLocally(artists);
                 Data.setLoggedIn(false)
+                handleRefresh()
                 break;
             case 'Log In':
                 navigate('/login')
@@ -82,15 +99,15 @@ const NavigationBar = () => {
     const handleKeyUp = (e) => {
         if (e.key === "Enter") {
             console.log("Search entry: ", e.target.value)
-            if(e.target.value !== "")
-                navigate('/search/'+e.target.value)
+            if (e.target.value !== "")
+                navigate('/search/' + e.target.value)
         }
     }
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2 }}>
-                Album Layout
+                Music Library
             </Typography>
             <Divider />
             <List>
@@ -127,7 +144,7 @@ const NavigationBar = () => {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        Music Library
+                        <Link href={'/'} color="inherit" underline="none">Music Library</Link>
                     </Typography>
 
                     {/* Search Bar */}
@@ -148,7 +165,7 @@ const NavigationBar = () => {
                     {/* Navigation Items */}
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' , background: '#1a73cbdb'}} onClick={() => { handleNavClick(item) }}>
+                            <Button key={item} sx={{ color: '#fff', background: '#1a73cbdb' }} onClick={() => { handleNavClick(item) }}>
                                 {item}
                             </Button>
                         ))}

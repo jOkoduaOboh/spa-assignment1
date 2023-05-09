@@ -15,6 +15,7 @@ const Song = () => {
     const song = useParams();
     const [songData, setSongData] = useState("")
     const [isInLibrary, setIsInLibrary] = useState(true)
+    const loggedIn = Data.getLoggedIn()
 
     useEffect(() => {
         const getResult = async () => {
@@ -40,7 +41,7 @@ const Song = () => {
     }, [])
 
     useEffect(() => {
-        if (Data.getLoggedIn() === true) {
+        if (loggedIn === true) {
             if (Data.getUserSongs() === null || Data.getUserSongs()[song.id] === undefined) {
                 setIsInLibrary(false)
             }
@@ -53,7 +54,7 @@ const Song = () => {
         switch (type) {
             case 'Add':
                 console.log("Data to add: ", songData)
-                newData = Data.getUserSongs()
+                newData = Data.getUserSongs() === null? {} : Data.getUserSongs();
                 newData[songData.id] = songData
                 Data.setUserSongs(newData)
                 setIsInLibrary(!isInLibrary)
@@ -139,11 +140,11 @@ const Song = () => {
                         spacing={2}
                         justifyContent="center"
                     >
-                        {!isInLibrary &&
+                        {loggedIn && !isInLibrary &&
                             <Button variant="contained" onClick={() => { handleButtonClick('Add') }}>
                                 Add to Library
                             </Button>}
-                        {isInLibrary &&
+                        {loggedIn && isInLibrary &&
                             <Button variant="outlined" onClick={() => { handleButtonClick("Remove") }}>
                                 Remove from Library
                             </Button>}

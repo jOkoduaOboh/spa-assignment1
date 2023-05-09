@@ -9,11 +9,11 @@ const getStoredData = (type) => {
     switch (type) {
         case 'song':
             console.log("Stored Data, ", Data.getUserSongs())
-            return Data.getUserSongs()
+            return Data.getUserSongs() === null ? {} : Data.getUserSongs();
         case 'album':
-            return Data.getUserAlbums()
+            return Data.getUserAlbums() === null ? {} : Data.getUserAlbums();
         case 'artist':
-            return Data.getUserArtists()
+            return Data.getUserArtists() === null ? {} : Data.getUserArtists();
         default:
     }
 }
@@ -63,20 +63,19 @@ const ListItems = ({ type, items }) => {
         console.log("Data in List Library, ", libraryData)
     }
     return (
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 3 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-                {type == 'song' &&
-                    cards.map((card) => (
-                        <Item 
-                        key={card.id} 
-                        data={card} 
-                        type={type} 
+                {cards.map((card) => (
+                    <Item
+                        key={card.id}
+                        data={card}
+                        type={type}
                         list={libraryData}
                         addData={addData}
                         removeData={removeData}
-                        />
-                    ))
+                    />
+                ))
                 }
             </Grid>
         </Container>

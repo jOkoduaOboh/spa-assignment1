@@ -4,8 +4,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ListItems from '../components/ListItems';
+import Recommendations from '../components/HomeSongs';
+import Data from '../components/UserData';
 
 export default function Home() {
+
+    console.log("All Songs Data, ", Data.getAllSongs())
 
     return (
         <main>
@@ -36,7 +40,7 @@ export default function Home() {
                 </Container>
             </Box>
 
-            <ListItems />
+            <ListItems type='song' items={Recommendations}/>
         </main>
             /* Footer  Cones After*/ 
     );

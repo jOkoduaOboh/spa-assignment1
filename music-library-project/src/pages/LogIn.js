@@ -62,6 +62,17 @@ export default function LogIn() {
       Data.setUserInfo(user)
       Data.setLoggedIn(true);
       if (Data.getLoggedIn() === true) {
+        if(Data.getAllAlbums() !== null){
+          Data.setUserAlbums(Data.getAllAlbums()[user.username] === undefined? {}:Data.getAllAlbums()[user.username])
+          console.log(Data.getUserAlbums())
+        }
+        if(Data.getAllSongs() !== null){
+          Data.setUserSongs(Data.getAllSongs()[user.username] === undefined? {}:Data.getAllSongs()[user.username])
+        }
+        if(Data.getAllArtists() !== null){
+          Data.setUserArtists(Data.getAllArtists()[user.username] === undefined? {}:Data.getAllArtists()[user.username])
+          console.log(Data.getUserArtists())
+        }
         navigate("/")
       }
     }

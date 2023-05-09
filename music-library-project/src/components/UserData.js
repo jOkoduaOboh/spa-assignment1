@@ -7,10 +7,6 @@ const storedAlbumsKey = "pro-music-lib-albums";
 const storedSongsKey = "pro-music-lib-songs";
 const storedArtistsKey = "pro-music-lib-artists";
 
-// Deletion of item syntax
-// delete userArtists.test2 // for object
-// userArtists.test.splice(0, 1) // for array
-
 const getData = (key) => {
     return JSON.parse(sessionStorage.getItem(key))
 }
@@ -97,7 +93,6 @@ const Data = {
     saveUserSongsLocally: (userSongs) => {
         const userInfo = getData(sessionUserKey);
         let localData = getLocalData(storedSongsKey) === null? {}: getLocalData(storedSongsKey)
-        console.log("Users Songs", userSongs)
         if (userSongs !== null)
             localData[userInfo.username] = userSongs
         setLocalData(storedSongsKey, localData)
@@ -112,8 +107,3 @@ const Data = {
 }
 
 export default Data;
-
-export {
-    sessionUserKey, sessionAlbumsKey, sessionSongsKey, sessionArtistsKey,
-    storedUsersKey
-}

@@ -7,10 +7,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Data from '../components/UserData';
 
 const Artist = () => {
     const artist = useParams();
     const [artistData, setArtistData] = useState("")
+    const [isInLibrary, setIsInLibrary] = useState(true)
+    const loggedIn = Data.getLoggedIn()
 
     useEffect(() => {
         const getResult = async () => {
@@ -34,6 +37,35 @@ const Artist = () => {
         }
         getResult();
     }, [])
+    useEffect(() => {
+        if (loggedIn === true) {
+            if (Data.getUserArtists() === null || Data.getUserArtists()[artist.id] === undefined) {
+                setIsInLibrary(false)
+            }
+        }
+    }, [])
+
+    const handleButtonClick = (type) => {
+        console.log(type)
+        let newData;
+        switch (type) {
+            case 'Add':
+                console.log("Data to add: ", artistData)
+                newData = Data.getUserArtists() === null ? {} : Data.getUserArtists();
+                newData[artistData.id] = artistData
+                Data.setUserArtists(newData)
+                setIsInLibrary(!isInLibrary)
+                break;
+            case 'Remove':
+                newData = Data.getUserArtists()
+                delete newData[artistData.id]
+                Data.setUserArtists(newData)
+                console.log(newData)
+                setIsInLibrary(!isInLibrary)
+                break;
+            default:
+        }
+    }
 
     if (artistData === "") {
         return (
@@ -92,7 +124,7 @@ const Artist = () => {
                         Fans: {artistData.nb_fan}
                     </Typography>
                     <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        
+
                     </Typography>
                     <Stack
                         sx={{
@@ -103,8 +135,14 @@ const Artist = () => {
                         spacing={2}
                         justifyContent="center"
                     >
-                        {false && <Button variant="contained">Add to Library</Button>}
-                        {true && <Button variant="outlined">Remove from Library</Button>}
+                        {loggedIn && !isInLibrary &&
+                            <Button variant="contained" onClick={() => handleButtonClick("Add")}>
+                                Add to Library
+                            </Button>}
+                        {loggedIn && isInLibrary &&
+                            <Button variant="outlined" onClick={() => handleButtonClick("Remove")}>
+                                Remove from Library
+                            </Button>}
                     </Stack>
                 </Container>
             </Box>

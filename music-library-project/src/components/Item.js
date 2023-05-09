@@ -10,6 +10,7 @@ import Data from './UserData';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StyledLink } from './utilities';
 
 const Item = ({ data, type, addData, removeData }) => {
     const navigate = useNavigate()
@@ -45,7 +46,7 @@ const Item = ({ data, type, addData, removeData }) => {
         console.log(e.target.value)
         switch (e.target.value) {
             case 'View':
-                navigate(`/song/${data.id}`)
+                navigate(`/${type}/${data.id}`)
                 break;
             case 'Add':
                 console.log("Data ", data)
@@ -74,14 +75,21 @@ const Item = ({ data, type, addData, removeData }) => {
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h6" component="h2">
-                        {data.title_short}
+                        {type === 'song' && data.title_short}
+                        {type === 'album' && data.title}
+                        {type === 'artist' && data.name}
                     </Typography>
-                    <Typography>
-                        Artist: {data.artist.name}
-                    </Typography>
-                    <Typography>
-                        Album: {data.album.title}
-                    </Typography>
+                    {type !== 'artist' &&
+                        <Typography>
+                            Artist: <StyledLink to={`/artist/${data.artist.id}`} contents={data.artist.name} />
+                        </Typography>
+                    }
+                    {type === 'song' &&
+                        <Typography>
+                            Album: <StyledLink to={`/album/${data.album.id}`} contents={data.album.title} />
+                        </Typography>
+                    }
+
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={handleButtonClick} value="View">View</Button>

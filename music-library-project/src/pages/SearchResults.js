@@ -52,7 +52,7 @@ export default function SearchResults() {
     return (
         <>
             <main>
-                <Box sx={{pt: '3vh'}}/>
+                <Box sx={{pt: '10vh'}}/>
                 <ListItems type='song' items={items}/>
             </main>
         </>

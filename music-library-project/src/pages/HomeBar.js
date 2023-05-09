@@ -12,14 +12,20 @@ import Song from './Song';
 import Album from './Album';
 import Artist from './Artist';
 import Library from './Library';
+import { useState } from 'react';
 
 const theme = createTheme();
 
 export default function HomeBar() {
+  const [refresh, setRefresh] = useState(true)
+
+  const handleRefresh = () => {
+    setRefresh(!refresh)
+  }
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavigationBar />
+      <NavigationBar handleRefresh={handleRefresh}/>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/:input" element={<Home />} />
