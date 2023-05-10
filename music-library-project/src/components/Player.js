@@ -31,7 +31,7 @@ const Player = ({ src }) => {
 
     return (
         <>
-            <ThemeProvider theme={muiTheme}>
+            <ThemeProvider theme={muiTheme} >
                 <AudioPlayer
                     src={src}
                     useStyles={useStyles}

@@ -100,6 +100,7 @@ const Song = () => {
                         sx={{
                             pt: 2,
                             width: "100%",
+                            mb: 1
                         }}
                         alt={songData.title}
                         src={songData.album.cover_big}
@@ -151,12 +152,6 @@ const Song = () => {
                     </Stack>
                 </Container>
             </Box>
-
-            <Container sx={{ py: 8 }} maxWidth="sm">
-                {/* End hero unit */}
-                <Grid container spacing={4}>
-                </Grid>
-            </Container>
         </>
 
     )

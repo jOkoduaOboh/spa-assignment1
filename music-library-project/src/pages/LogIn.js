@@ -14,19 +14,6 @@ import { useNavigate } from 'react-router-dom';
 
 import Data from '../components/UserData';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="white" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function LogIn() {
@@ -85,7 +72,7 @@ export default function LogIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ mb: 10 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -153,7 +140,6 @@ export default function LogIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

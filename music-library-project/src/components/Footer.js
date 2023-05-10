@@ -17,7 +17,7 @@ function Copyright() {
 
 const Footer = () => {
     return (
-        <Box component="footer">
+        <Box component="footer" sx={{ mt: 10 }}>
             <Typography
                 variant="subtitle1"
                 align="center"

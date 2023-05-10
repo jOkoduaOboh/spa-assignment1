@@ -14,19 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Data from '../components/UserData';
 import { useNavigate } from 'react-router-dom';
 
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="white" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
 const theme = createTheme();
 const textSX = {
     input: { color: 'white' },
@@ -93,7 +80,7 @@ export default function SignUp() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={{ mb: 5 }}>
                 <CssBaseline />
                 <Box
                     sx={{
@@ -175,7 +162,6 @@ export default function SignUp() {
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 5 }} />
             </Container>
         </ThemeProvider>
     );
