@@ -63,7 +63,7 @@ export default function SignUp() {
                 console.log("All + user: ", allUsers)
                 console.log("Info: ", enteredInfo)
 
-                Data.setAllUsers(allUsers)
+                Data.saveUserInfoLocally(allUsers)
                 console.log("Data Users: ", Data.getAllUsers())
                 Data.setLoggedIn(true);
                 if(Data.getLoggedIn() === true){
