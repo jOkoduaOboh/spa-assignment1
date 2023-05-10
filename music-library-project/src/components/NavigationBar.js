@@ -30,14 +30,15 @@ const NavigationBar = ({handleRefresh}) => {
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const loggedIn = Data.getLoggedIn()
 
     useEffect(() => {
-        if (Data.getLoggedIn() === true) {
+        if (loggedIn === true) {
             settings = ['Logout'];
         } else {
             settings = ['Log In', 'Sign Up'];
         }
-    }, [Data.getLoggedIn()])
+    }, [loggedIn])
 
 
     const handleDrawerToggle = () => {
