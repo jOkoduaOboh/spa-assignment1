@@ -79,7 +79,7 @@ const Data = {
         return getLocalData(storedArtistsKey)
     },
     saveUserInfoLocally: (userData) => {
-        let localData = getLocalData(storedUsersKey)
+        let localData = getLocalData(storedUsersKey) === null? {}: getLocalData(storedAlbumsKey)
         localData[userData.username] = userData
         setLocalData(storedUsersKey, localData)
     },
