@@ -59,17 +59,17 @@ export default function SignUp() {
                     userInfo.get('username'),
                     userInfo.get('password')
                 )
-                allUsers[userInfo.get('username')] = enteredInfo;
                 console.log("All + user: ", allUsers)
                 console.log("Info: ", enteredInfo)
+                console.log("UNAME: ", enteredInfo.username)
 
                 Data.saveUserInfoLocally(enteredInfo)
                 console.log("Data Users: ", Data.getAllUsers())
+                Data.setUserInfo(enteredInfo)
                 Data.setLoggedIn(true);
                 if(Data.getLoggedIn() === true){
                     navigate("/")
-                }
-                Data.setUserInfo(enteredInfo)
+                }                
             } else {
                 setErrorMessage("This username is already in use");
                 setInputError(true);
